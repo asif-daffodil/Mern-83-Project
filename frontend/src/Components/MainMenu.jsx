@@ -1,8 +1,31 @@
+import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useEffect, useState } from "react";
 
 const MainMenu = () => {
+    const [isDarkMode, setIsDarkMode] = useState(false);
+    const toggleDarkMode = () => {
+        setIsDarkMode(!isDarkMode);
+        if (isDarkMode) {
+            document.body.classList.remove("dark");
+            sessionStorage.setItem("darkMode", "false");
+        } else {
+            document.body.classList.add("dark");
+            sessionStorage.setItem("darkMode", "true");
+        }
+    };
+
+    useEffect(() => {
+        const darkMode = sessionStorage.getItem("darkMode");
+        if (darkMode === "true") {
+            setIsDarkMode(true);
+            document.body.classList.add("dark");
+        }
+    }, []);
+
     return (
-        <div className="bg-neutral">
-            <div className="container mx-auto navbar text-neutral-content">
+        <div className="bg-stone-200 dark:bg-neutral">
+            <div className="container mx-auto navbar text-stone-600 dark:text-neutral-content">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -21,7 +44,7 @@ const MainMenu = () => {
                         </div>
                         <ul
                             tabIndex={0}
-                            className="menu menu-sm dropdown-content bg-neutral rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                            className="menu menu-sm dropdown-content bg-stone-200 dark:bg-neutral rounded-box z-[1] mt-3 w-52 p-2 shadow">
                             <li><a>Item 1</a></li>
                             <li>
                                 <a>Parent</a>
@@ -43,7 +66,7 @@ const MainMenu = () => {
                             <li>
                                 <details>
                                     <summary>Parent</summary>
-                                    <ul className="p-2 bg-neutral rounded-sm w-max">
+                                    <ul className="p-2 bg-stone-200 dark:bg-neutral rounded-sm w-max">
                                         <li><a>Submenu 1</a></li>
                                         <li><a>Submenu 2</a></li>
                                     </ul>
@@ -72,7 +95,7 @@ const MainMenu = () => {
                         </div>
                         <div
                             tabIndex={0}
-                            className="card card-compact dropdown-content bg-neutral z-[1] mt-3 w-52 shadow">
+                            className="card card-compact dropdown-content bg-stone-200 dark:bg-neutral z-[1] mt-3 w-52 shadow">
                             <div className="card-body">
                                 <span className="text-lg font-bold">8 Items</span>
                                 <span className="text-info">Subtotal: $999</span>
@@ -92,7 +115,7 @@ const MainMenu = () => {
                         </div>
                         <ul
                             tabIndex={0}
-                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                            className="menu menu-sm dropdown-content bg-stone-200 dark:bg-neutral rounded-box z-[1] mt-3 w-52 p-2 shadow">
                             <li>
                                 <a className="justify-between">
                                     Profile
@@ -101,6 +124,25 @@ const MainMenu = () => {
                             </li>
                             <li><a>Settings</a></li>
                             <li><a>Logout</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul
+                            tabIndex={0}
+                            className="menu">
+                            {isDarkMode ? (
+                                <li>
+                                    <a onClick={() => toggleDarkMode()} >
+                                        <FontAwesomeIcon icon={faSun} />
+                                    </a>
+                                </li>
+                            ) : (
+                                <li>
+                                    <a onClick={() => toggleDarkMode()}>
+                                        <FontAwesomeIcon icon={faMoon} />
+                                    </a>
+                                </li>
+                            )}
                         </ul>
                     </div>
                 </div>
