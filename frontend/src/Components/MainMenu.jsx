@@ -62,17 +62,17 @@ const MainMenu = () => {
                 <div className="navbar-end">
                     <div className="navbar-center hidden lg:flex">
                         <ul className="menu menu-horizontal px-1">
-                            <li><a>Item 1</a></li>
+                            <li><a href="./">Home</a></li>
                             <li>
                                 <details>
-                                    <summary>Parent</summary>
+                                    <summary>Services</summary>
                                     <ul className="p-2 bg-stone-200 dark:bg-neutral rounded-sm w-max">
-                                        <li><a>Submenu 1</a></li>
-                                        <li><a>Submenu 2</a></li>
+                                        <li><a href="about">About</a></li>
+                                        <li><a href="blog">Blog</a></li>
                                     </ul>
                                 </details>
                             </li>
-                            <li><a>Item 3</a></li>
+                            <li><a href="./contact">Contact</a></li>
                         </ul>
                     </div>
                     <div className="dropdown dropdown-end">
