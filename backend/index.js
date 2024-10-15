@@ -43,6 +43,19 @@ const heroBottomSchema = new mongoose.Schema({
     icon: String
 });
 
+const HeroBottom = mongoose.model('HeroBottom', heroBottomSchema);
+
+//  heroBottom routes getData
+app.get('/heroBottom', (req, res) => {
+    try{
+        HeroBottom.find().then((data) => {
+            res.send(data).status(200);
+        });
+    }catch(e){
+        res.send(e).status(400);
+    }
+});
+
 // routes
 app.get('/', (req, res) => {
     res.send('Hello World');
