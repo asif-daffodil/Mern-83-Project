@@ -4,10 +4,10 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 const iconMap = {
-    clock: faClock,
-    creditCard: faCreditCard,
-    dollar: faDollar,
-    truckFast: faTruckFast,
+    faClock: faClock,
+    faCreditCard: faCreditCard,
+    faDollar: faDollar,
+    faTruckFast: faTruckFast,
 };
 
 const HeroBottom = () => {
