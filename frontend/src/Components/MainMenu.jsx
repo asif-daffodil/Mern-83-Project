@@ -3,8 +3,11 @@ import { faCartShopping } from "@fortawesome/free-solid-svg-icons/faCartShopping
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../firebaseConfig";
 
 const MainMenu = () => {
+    const [user] = useAuthState(auth);
     const [isDarkMode, setIsDarkMode] = useState(false);
     const toggleDarkMode = () => {
         setIsDarkMode(!isDarkMode);
@@ -23,7 +26,13 @@ const MainMenu = () => {
             setIsDarkMode(true);
             document.body.classList.add("dark");
         }
-    }, []);
+        if (user && !user.displayName) {
+            // Optionally re-fetch the user profile from Firebase if displayName is not set
+            auth.currentUser.reload().then(() => {
+                console.log("User data reloaded:", auth.currentUser);
+            });
+        }
+    }, [user]);
 
     return (
         <div className="bg-stone-200 dark:bg-stone-600">
@@ -68,12 +77,16 @@ const MainMenu = () => {
                                     </ul>
                                 </details>
                             </li>
-                            <li>
-                                <NavLink to="/sign-in" >Sign-in</NavLink>
-                            </li>
-                            <li>
-                                <NavLink to="/sign-up" >Sign-up</NavLink>
-                            </li>
+                            {!user && (
+                                <>
+                                    <li>
+                                        <NavLink to="/sign-in" >Sign-in</NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to="/sign-up" >Sign-up</NavLink>
+                                    </li>
+                                </>
+                            )}
                         </ul>
                     </div>
                     <div className="dropdown dropdown-end">
@@ -95,27 +108,25 @@ const MainMenu = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="dropdown dropdown-end">
-                        <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                            <div className="w-10 rounded-full">
-                                <img
-                                    alt="Tailwind CSS Navbar component"
-                                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-                            </div>
-                        </div>
-                        <ul
-                            tabIndex={0}
-                            className="menu menu-sm dropdown-content bg-stone-200 dark:bg-neutral rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                    {user && (
+                        <ul className="menu menu-horizontal">
                             <li>
-                                <a className="justify-between">
-                                    Profile
-                                    <span className="badge">New</span>
-                                </a>
+                                <details>
+                                    <summary>{user.displayName || "Profile"}</summary>
+                                    <ul className="p-2 bg-stone-200 dark:bg-neutral rounded-sm w-max">
+                                        <li>
+                                            <a className="justify-between">
+                                                Profile
+                                                <span className="badge">New</span>
+                                            </a>
+                                        </li>
+                                        <li><a>Settings</a></li>
+                                        <li><NavLink to='/logout'>Logout</NavLink></li>
+                                    </ul>
+                                </details>
                             </li>
-                            <li><a>Settings</a></li>
-                            <li><a>Logout</a></li>
                         </ul>
-                    </div>
+                    )}
                     <div>
                         <ul
                             tabIndex={0}

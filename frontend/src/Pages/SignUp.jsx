@@ -1,16 +1,58 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import img from "../assets/images/2402277.jpg";
+import { useAuthState, useCreateUserWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { updateProfile } from "firebase/auth";  // Import the updateProfile method
+import auth from "../firebaseConfig";
+import toastr from 'toastr';
+import { useEffect } from "react";
 
 const SignUp = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
+  
+  const navigate = useNavigate();
+  
+  const [user, loading, error] = useAuthState(auth);
+  const [signInWithGoogle] = useSignInWithGoogle(auth);
+  const [createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(auth);
+
+  const { register, handleSubmit, formState: { errors } } = useForm();
+
+  const onSubmit = async (data) => {
+    try {
+      // Create user with email and password
+      const userCredential = await createUserWithEmailAndPassword(data.email, data.password);
+      if (userCredential) {
+        // Update profile with the display name
+        await updateProfile(userCredential.user, {
+          displayName: data.name,
+        });
+
+        toastr.success("User created successfully");
+
+        // Delay navigation until the profile is updated
+        setTimeout(() => {
+          navigate("/sign-in");  // Redirect to sign-in page or home after
+        }, 2000);
+      }
+    } catch (error) {
+      toastr.error("User creation failed: " + error.message);
+    }
   };
+
+  // Watch for user updates and avoid redirecting too early
+  useEffect(() => {
+    if (user && user.displayName) {
+      navigate("/");  // Now redirect to home after the name is updated
+    }
+  }, [user, navigate]);  // UseEffect runs when `user` or `navigate` changes
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
   return (
     <div className="flex min-h-screen bg-gray-100">
@@ -105,7 +147,7 @@ const SignUp = () => {
               )}
             </div>
 
-            <div className="mb-6">
+            <div className="mb-4">
               <label
                 className="block text-gray-700 dark:text-white"
                 htmlFor="confirmPassword"
@@ -150,7 +192,7 @@ const SignUp = () => {
             </p>
           </form>
           <div className="mt-4">
-            <button className="w-full bg-gray-100 p-2 rounded hover:bg-gray-200 transition duration-200 dark:text-black">
+            <button className="w-full bg-gray-100 p-2 rounded hover:bg-gray-200 transition duration-200 dark:text-black" onClick={()=> signInWithGoogle()}>
               <img
                 src="https://img.icons8.com/color/48/000000/google-logo.png"
                 alt="Google Logo"

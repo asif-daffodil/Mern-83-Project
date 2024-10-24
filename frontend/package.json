@@ -20,7 +20,8 @@
     "react-dom": "^18.2.0",
     "react-firebase-hooks": "^5.1.1",
     "react-hook-form": "^7.53.0",
-    "react-router-dom": "^6.26.2"
+    "react-router-dom": "^6.26.2",
+    "toastr": "^2.1.4"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",

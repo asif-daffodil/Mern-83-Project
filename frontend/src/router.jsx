@@ -3,6 +3,7 @@ import Home from "./Pages/Home";
 import Layout from "./Layout";
 import SignUp from "./Pages/SignUp";
 import SignIn from "./Pages/SignIn";
+import Logout from "./Pages/Logout";
 
 const router = createBrowserRouter([
     {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
               path: "/sign-in",
               element: <SignIn />
             },
+            {
+              path: "/logout",
+              element: <Logout />
+            }
         ]
     },
   ]);
