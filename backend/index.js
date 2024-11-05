@@ -56,6 +56,29 @@ app.get('/heroBottom', (req, res) => {
     }
 });
 
+// get latest products
+const productSchema = new mongoose.Schema({
+    title: String,
+    img: String,
+    old_price: Number,
+    sale_price: Number,
+    short_description: String
+});
+
+const Product = mongoose.model('Product', productSchema);
+
+app.get('/latestProducts', (req, res) => {
+    try {
+        Product.find().sort({ _id: -1 }).limit(6).then((data) => {
+            res.send(data).status(200);
+        });
+    } catch (e) {
+        res.send(e).status(400);
+    }
+});
+
+
+
 // routes
 app.get('/', (req, res) => {
     res.send('Hello World');
