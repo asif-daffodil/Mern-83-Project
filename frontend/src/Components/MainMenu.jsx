@@ -35,8 +35,8 @@ const MainMenu = () => {
     }, [user]);
 
     return (
-        <div className="bg-stone-200 dark:bg-stone-600">
-            <div className="container mx-auto navbar text-stone-600 dark:text-neutral-content">
+        <div className="bg-white dark:bg-neutral">
+            <div className="container mx-auto navbar text-black dark:text-neutral-content">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -44,20 +44,20 @@ const MainMenu = () => {
                         </div>
                         <ul
                             tabIndex={0}
-                            className="menu menu-sm dropdown-content bg-stone-200 dark:bg-neutral rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                            <li><NavLink to="/">Home</NavLink></li>
-                            <li>
+                            className="menu menu-sm dropdown-content dark:bg-neutral bg-white rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                            <li className={`text-[#121212] dark:text-white`}><NavLink to="/">Home</NavLink></li>
+                            <li className={`text-[#121212] dark:text-white`}>
                                 <a>Parent</a>
                                 <ul className="p-2">
-                                    <li><a>Submenu 1</a></li>
-                                    <li><a>Submenu 2</a></li>
+                                    <li className={`text-[#121212] dark:text-white`}><a>Submenu 1</a></li>
+                                    <li className={`text-[#121212] dark:text-white`}><a>Submenu 2</a></li>
                                 </ul>
                             </li>
                             <li>
-                                <NavLink to="/sign-in">Sign-in</NavLink>
+                                <NavLink to="/sign-in" className={`text-[#121212] dark:text-white`}>Sign-in</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/sign-up">Sign-up</NavLink>
+                                <NavLink to="/sign-up" className={`text-[#121212] dark:text-white`}>Sign-up</NavLink>
                             </li>
                         </ul>
                     </div>
