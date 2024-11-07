@@ -45,7 +45,7 @@ const MainMenu = () => {
                         <ul
                             tabIndex={0}
                             className="menu menu-sm dropdown-content dark:bg-neutral bg-white rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                            <li className={`text-[#121212] dark:text-white`}><NavLink to="/">Home</NavLink></li>
+                            <li><NavLink to="/" className={`text-[#121212] dark:text-white`} >Home</NavLink></li>
                             <li className={`text-[#121212] dark:text-white`}>
                                 <a>Parent</a>
                                 <ul className="p-2">
@@ -66,24 +66,24 @@ const MainMenu = () => {
 
                 <div className="navbar-end">
                     <div className="navbar-center hidden lg:flex">
-                        <ul className="menu menu-horizontal px-1">
-                            <li><NavLink to="/" >Home</NavLink></li>
+                        <ul className="menu menu-horizontal px-1 ">
+                            <li className={`text-[#121212] dark:text-white`}><NavLink to="/" className={`text-[#121212] dark:text-white`} >Home</NavLink></li>
                             <li>
                                 <details>
-                                    <summary>Parent</summary>
+                                    <summary className={`text-[#121212] dark:text-white`} >Parent</summary>
                                     <ul className="p-2 bg-stone-200 dark:bg-neutral rounded-sm w-max">
-                                        <li><a>Submenu 1</a></li>
-                                        <li><a>Submenu 2</a></li>
+                                        <li className={`text-[#121212] dark:text-white`} ><a>Submenu 1</a></li>
+                                        <li className={`text-[#121212] dark:text-white`} ><a>Submenu 2</a></li>
                                     </ul>
                                 </details>
                             </li>
                             {!user && (
                                 <>
                                     <li>
-                                        <NavLink to="/sign-in" >Sign-in</NavLink>
+                                        <NavLink to="/sign-in" className={`text-[#121212] dark:text-white`} >Sign-in</NavLink>
                                     </li>
                                     <li>
-                                        <NavLink to="/sign-up" >Sign-up</NavLink>
+                                        <NavLink to="/sign-up" className={`text-[#121212] dark:text-white`} >Sign-up</NavLink>
                                     </li>
                                 </>
                             )}
@@ -91,17 +91,17 @@ const MainMenu = () => {
                     </div>
                     <div className="dropdown dropdown-end">
                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
-                            <div className="indicator">
-                                <FontAwesomeIcon icon={faCartShopping} />
-                                <span className="badge badge-xs indicator-item">8</span>
+                            <div className="indicator ">
+                                <FontAwesomeIcon icon={faCartShopping} className={`text-[#121212] dark:text-white`} />
+                                <span className="badge badge-xs indicator-item text-[#FFF] dark:text-white`">8</span>
                             </div>
                         </div>
                         <div
                             tabIndex={0}
                             className="card card-compact dropdown-content bg-stone-200 dark:bg-neutral z-[1] mt-3 w-52 shadow">
                             <div className="card-body">
-                                <span className="text-lg font-bold">8 Items</span>
-                                <span className="text-info">Subtotal: $999</span>
+                                <span className="text-lg font-bold text-[#000] dark:text-white">8 Items</span>
+                                <span className=" text-[#000] dark:text-white">Subtotal: $999</span>
                                 <div className="card-actions">
                                     <button className="btn btn-primary btn-block">View cart</button>
                                 </div>
@@ -115,13 +115,13 @@ const MainMenu = () => {
                                     <summary>{user.displayName || "Profile"}</summary>
                                     <ul className="p-2 bg-stone-200 dark:bg-neutral rounded-sm w-max">
                                         <li>
-                                            <a className="justify-between">
+                                            <a className="justify-between text-[#000] dark:text-white">
                                                 Profile
                                                 <span className="badge">New</span>
                                             </a>
                                         </li>
-                                        <li><a>Settings</a></li>
-                                        <li><NavLink to='/logout'>Logout</NavLink></li>
+                                        <li className="text-[#000] dark:text-white"><a>Settings</a></li>
+                                        <li className="text-[#000] dark:text-white"><NavLink to='/logout'>Logout</NavLink></li>
                                     </ul>
                                 </details>
                             </li>
@@ -132,13 +132,13 @@ const MainMenu = () => {
                             tabIndex={0}
                             className="menu">
                             {isDarkMode ? (
-                                <li>
+                                <li className="text-[#000] dark:text-white">
                                     <a onClick={() => toggleDarkMode()} >
                                         <FontAwesomeIcon icon={faSun} />
                                     </a>
                                 </li>
                             ) : (
-                                <li>
+                                <li className="text-[#000] dark:text-white">
                                     <a onClick={() => toggleDarkMode()}>
                                         <FontAwesomeIcon icon={faMoon} />
                                     </a>
