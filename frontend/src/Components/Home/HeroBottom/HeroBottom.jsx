@@ -23,7 +23,7 @@ const HeroBottom = () => {
     if (heroBottom.error) return <div>Error: {heroBottom.error.message}</div>;
 
     return (
-        <div className="py-5 dark:bg-neutral">
+        <div className="py-5 dark:bg-neutral bg-white">
             <div className="container mx-auto">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     {heroBottom.data.map((item, index) => (
@@ -32,8 +32,8 @@ const HeroBottom = () => {
                                 <FontAwesomeIcon icon={iconMap[item.icon]} />
                             </div>
                             <div>
-                                <h2 className="text-base lg:text-lg">{item.title}</h2>
-                                <p className="text-sm text-stone-500">{item.description}</p>
+                                <h2 className="text-base lg:text-lg text-[#121212] dark:text-[#3A80F6]">{item.title}</h2>
+                                <p className="text-sm text-[#121212] dark:text-[#3A80F6]">{item.description}</p>
                             </div>
                         </div>
                     ))}
